@@ -22,6 +22,8 @@ public class Main {
      trainService.mapBogieCapacity();
      //uc7
      trainService.sortBogiesByCapacity();
+     //uc9
+        trainService.groupBogiesByType();
      //uc8
      trainService.filterPassengerBogies();
     }

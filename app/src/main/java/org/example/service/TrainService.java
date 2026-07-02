@@ -130,10 +130,9 @@ public class TrainService {
         System.out.println();
 
         List<Bogie> bogies = new ArrayList<>();
-
-        bogies.add(new Bogie("Sleeper", 72));
-        bogies.add(new Bogie("AC Chair", 56));
-        bogies.add(new Bogie("First Class", 24));
+        bogies.add(new Bogie("Sleeper", "Passenger", 72));
+        bogies.add(new Bogie("AC Chair", "Passenger", 56));
+        bogies.add(new Bogie("First Class", "Passenger", 24));
 
         bogies.sort(Comparator.comparingInt(Bogie::getCapacity));
 
@@ -150,6 +149,7 @@ public class TrainService {
         }
 
     }
+    public void groupBogiesByType() {
     public void filterPassengerBogies() {
 
         System.out.println("=== Train Consist Management App ===");
@@ -157,6 +157,33 @@ public class TrainService {
 
         List<Bogie> bogies = new ArrayList<>();
 
+        bogies.add(new Bogie("Sleeper", "Passenger", 72));
+        bogies.add(new Bogie("AC Chair", "Passenger", 56));
+        bogies.add(new Bogie("First Class", "Passenger", 24));
+        bogies.add(new Bogie("Cargo", "Goods", 120));
+        bogies.add(new Bogie("Parcel Van", "Goods", 80));
+
+        Map<String, List<Bogie>> groupedBogies =
+                bogies.stream()
+                        .collect(Collectors.groupingBy(Bogie::getType));
+
+        System.out.println("Grouped Bogies");
+        System.out.println("--------------");
+
+        groupedBogies.forEach((type, bogieList) -> {
+
+            System.out.println(type + " :");
+
+            for (Bogie bogie : bogieList) {
+                System.out.println("   "
+                        + bogie.getName()
+                        + " -> "
+                        + bogie.getCapacity());
+            }
+
+            System.out.println();
+
+        });
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 56));
         bogies.add(new Bogie("First Class", 24));
