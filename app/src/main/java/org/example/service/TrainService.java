@@ -124,98 +124,83 @@ public class TrainService {
 
     }
 
-    public void sortBogiesByCapacity() {
 
-        System.out.println("=== Train Consist Management App ===");
-        System.out.println();
+    /*
+        UC7
+     */
+    public void sortBogiesByCapacity(Train train) {
 
-        List<Bogie> bogies = new ArrayList<>();
-        bogies.add(new Bogie("Sleeper", "Passenger", 72));
-        bogies.add(new Bogie("AC Chair", "Passenger", 56));
-        bogies.add(new Bogie("First Class", "Passenger", 24));
+        train.getBogies()
+                .sort(Comparator.comparingInt(Bogie::getCapacity));
 
-        bogies.sort(Comparator.comparingInt(Bogie::getCapacity));
+        System.out.println("\n===== Sorted Bogies =====");
 
-        System.out.println("Bogies Sorted by Capacity");
-        System.out.println("-------------------------");
-
-        for (Bogie bogie : bogies) {
-
-            System.out.println(
-                    bogie.getName()
-                            + " --> "
-                            + bogie.getCapacity());
-
-        }
-
+        train.getBogies()
+                .forEach(System.out::println);
     }
-    public void filterPassengerBogies() {
 
-        System.out.println("=== Train Consist Management App ===");
-        System.out.println();
+    /*
+        UC8
+     */
 
-        List<Bogie> bogies = new ArrayList<>();
+    public void filterPassengerBogies(Train train) {
 
-        bogies.add(new Bogie("Sleeper", "Passenger", 72));
-        bogies.add(new Bogie("AC Chair", "Passenger", 56));
-        bogies.add(new Bogie("First Class", "Passenger", 24));
-        bogies.add(new Bogie("Cargo", "Goods", 120));
-
-
-        List<Bogie> filteredBogies =
-                bogies.stream()
-                        .filter(bogie -> bogie.getCapacity() > 60)
+        List<Bogie> filtered =
+                train.getBogies()
+                        .stream()
+                        .filter(b -> b.getCapacity() > 60)
                         .collect(Collectors.toList());
 
-        System.out.println("Passenger Bogies with Capacity > 60");
-        System.out.println("-----------------------------------");
+        System.out.println("\n===== Capacity Greater Than 60 =====");
 
-        for (Bogie bogie : filteredBogies) {
-
-            System.out.println(
-                    bogie.getName()
-                            + " --> "
-                            + bogie.getCapacity());
-
-        }
-
+        filtered.forEach(System.out::println);
     }
-    public void groupBogiesByType() {
 
-        System.out.println("=== Train Consist Management App ===");
-        System.out.println();
+    /*
+        UC9
+     */
 
-        List<Bogie> bogies = new ArrayList<>();
+    public void groupBogies(Train train) {
 
-        bogies.add(new Bogie("Sleeper", "Passenger", 72));
-        bogies.add(new Bogie("AC Chair", "Passenger", 56));
-        bogies.add(new Bogie("First Class", "Passenger", 24));
-        bogies.add(new Bogie("Cargo", "Goods", 120));
-        bogies.add(new Bogie("Parcel Van", "Goods", 80));
+        Map<String, List<Bogie>> grouped =
 
-        Map<String, List<Bogie>> groupedBogies =
-                bogies.stream()
+                train.getBogies()
+                        .stream()
                         .collect(Collectors.groupingBy(Bogie::getType));
 
-        System.out.println("Grouped Bogies");
-        System.out.println("--------------");
+        System.out.println("\n===== Grouped Bogies =====");
 
-        groupedBogies.forEach((type, bogieList) -> {
+        grouped.forEach((type, list) -> {
 
-            System.out.println(type + " :");
+            System.out.println(type);
 
-            for (Bogie bogie : bogieList) {
-                System.out.println("   "
-                        + bogie.getName()
-                        + " -> "
-                        + bogie.getCapacity());
-            }
+            list.forEach(System.out::println);
 
             System.out.println();
 
         });
 
     }
+
+    /*
+        UC10
+     */
+
+    public void totalSeats(Train train) {
+
+        Integer total =
+
+                train.getBogies()
+                        .stream()
+                        .map(Bogie::getCapacity)
+                        .reduce(0, Integer::sum);
+
+        System.out.println("\n==============================");
+        System.out.println("Total Seating Capacity : " + total);
+        System.out.println("==============================");
+
+    }
+
 
 
     public Train getTrain() {
