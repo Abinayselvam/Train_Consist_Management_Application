@@ -20,30 +20,9 @@ public class TrainService {
         System.out.println();
 
         System.out.println("Train initialized successfully.");
-        System.out.println("Initial Bogie Count : " + train.getConsist().size());
+        System.out.println("Initial Bogie Count : " + train.getBogies().size());
     }
-    public void addPassengerBogies() {
 
-        System.out.println("=== Train Consist Management App ===");
-        System.out.println();
-
-        train.getConsist().add("Sleeper");
-        train.getConsist().add("AC Chair");
-        train.getConsist().add("First Class");
-
-        System.out.println("Passenger Bogies:");
-        System.out.println(train.getConsist());
-
-        train.getConsist().remove("AC Chair");
-
-        System.out.println();
-        System.out.println("After Removing AC Chair:");
-        System.out.println(train.getConsist());
-
-        System.out.println();
-        System.out.println("Sleeper Exists : "
-                + train.getConsist().contains("Sleeper"));
-    }
     public void trackUniqueBogieIds() {
 
         Set<String> bogieIds = new HashSet<>();

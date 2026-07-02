@@ -23,8 +23,7 @@ public class Main {
      TrainService trainService = new TrainService();
      //uc1
      trainService.displaySummary();
-     //uc2
-     trainService.addPassengerBogies();
+
      //uc3
      trainService.trackUniqueBogieIds();
      //uc4
