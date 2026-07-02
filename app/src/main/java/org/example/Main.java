@@ -20,5 +20,7 @@ public class Main {
      trainService.preserveInsertionOrder();
      //uc6
      trainService.mapBogieCapacity();
+     //uc7
+     trainService.sortBogiesByCapacity();
     }
 }
