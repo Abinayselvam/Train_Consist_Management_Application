@@ -16,6 +16,9 @@ public class Main {
      trainService.trackUniqueBogieIds();
      //uc4
      trainService.maintainOrderedTrain();
-
+     //uc5
+     trainService.preserveInsertionOrder();
+     //uc6
+     trainService.mapBogieCapacity();
     }
 }

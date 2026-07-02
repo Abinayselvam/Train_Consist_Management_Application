@@ -1,9 +1,8 @@
 package org.example.service;
 
 import org.example.model.Train;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
+
+import java.util.*;
 
 
 public class TrainService {
@@ -74,6 +73,55 @@ public class TrainService {
         System.out.println("Final Train Consist");
         System.out.println(train);
     }
+
+    public void preserveInsertionOrder() {
+
+        System.out.println("=== Train Consist Management App ===");
+        System.out.println();
+
+        Set<String> trainFormation = new LinkedHashSet<>();
+
+        trainFormation.add("Engine");
+        trainFormation.add("Sleeper");
+        trainFormation.add("Cargo");
+        trainFormation.add("Guard");
+
+        // Duplicate Entry
+        trainFormation.add("Sleeper");
+
+        System.out.println("Train Formation");
+
+        for (String bogie : trainFormation) {
+            System.out.println(bogie);
+        }
+
+        System.out.println();
+
+        System.out.println("Total Bogies : " + trainFormation.size());
+    }
+    public void mapBogieCapacity() {
+
+        System.out.println("=== Train Consist Management App ===");
+        System.out.println();
+
+        Map<String, Integer> bogieCapacity = new HashMap<>();
+
+        bogieCapacity.put("Sleeper", 72);
+        bogieCapacity.put("AC Chair", 78);
+        bogieCapacity.put("First Class", 24);
+
+        System.out.println("Bogie Capacity Details");
+        System.out.println("----------------------");
+
+        for (Map.Entry<String, Integer> entry : bogieCapacity.entrySet()) {
+
+            System.out.println("Bogie Name : " + entry.getKey());
+            System.out.println("Capacity   : " + entry.getValue());
+            System.out.println();
+        }
+
+    }
+
 
     public Train getTrain() {
         return train;
