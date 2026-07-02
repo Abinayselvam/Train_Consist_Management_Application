@@ -1,38 +1,46 @@
 package org.example.model;
 
 public class Bogie {
-    private String name;
-    private int capacity;
 
-    public Bogie() {
-    }
+        private String name;
+        private String type;
+        private int capacity;
 
-    public Bogie(String name, int capacity) {
-        this.name = name;
-        this.capacity = capacity;
-    }
+        public Bogie() {
+        }
 
-    public String getName() {
-        return name;
-    }
+        public Bogie(String name, String type, int capacity) {
+            this.name = name;
+            this.type = type;
+            this.capacity = capacity;
+        }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+        public String getName() {
+            return name;
+        }
 
-    public int getCapacity() {
-        return capacity;
-    }
+        public String getType() {
+            return type;
+        }
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
+        public int getCapacity() {
+            return capacity;
+        }
 
-    @Override
-    public String toString() {
-        return "Bogie{" +
-                "name='" + name + '\'' +
-                ", capacity=" + capacity +
-                '}';
-    }
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public void setCapacity(int capacity) {
+            this.capacity = capacity;
+        }
+
+        @Override
+        public String toString() {
+            return name + " (" + capacity + ")";
+        }
 }
