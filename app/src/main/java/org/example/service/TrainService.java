@@ -4,6 +4,8 @@ import org.example.model.Bogie;
 import org.example.model.Train;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
@@ -179,7 +181,33 @@ public class TrainService {
         System.out.println("==============================");
 
     }
+    /*
+     * UC11 : Validate Train ID
+     */
+    public boolean validateTrainId(String trainId) {
 
+        String regex = "TRN-\\d{4}";
+
+        Pattern pattern = Pattern.compile(regex);
+
+        Matcher matcher = pattern.matcher(trainId);
+
+        return matcher.matches();
+    }
+
+    /*
+     * UC11 : Validate Cargo Code
+     */
+    public boolean validateCargoCode(String cargoCode) {
+
+        String regex = "PET-[A-Z]{2}";
+
+        Pattern pattern = Pattern.compile(regex);
+
+        Matcher matcher = pattern.matcher(cargoCode);
+
+        return matcher.matches();
+    }
 
 
     public Train getTrain() {
