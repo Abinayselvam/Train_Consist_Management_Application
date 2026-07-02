@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.model.Bogie;
 import org.example.model.Train;
 
 import java.util.*;
@@ -122,6 +123,32 @@ public class TrainService {
 
     }
 
+    public void sortBogiesByCapacity() {
+
+        System.out.println("=== Train Consist Management App ===");
+        System.out.println();
+
+        List<Bogie> bogies = new ArrayList<>();
+
+        bogies.add(new Bogie("Sleeper", 72));
+        bogies.add(new Bogie("AC Chair", 56));
+        bogies.add(new Bogie("First Class", 24));
+
+        bogies.sort(Comparator.comparingInt(Bogie::getCapacity));
+
+        System.out.println("Bogies Sorted by Capacity");
+        System.out.println("-------------------------");
+
+        for (Bogie bogie : bogies) {
+
+            System.out.println(
+                    bogie.getName()
+                            + " --> "
+                            + bogie.getCapacity());
+
+        }
+
+    }
 
     public Train getTrain() {
         return train;
