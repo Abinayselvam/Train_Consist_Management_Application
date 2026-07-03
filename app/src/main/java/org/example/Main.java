@@ -170,6 +170,33 @@ public class Main {
         System.out.println();
 
         System.out.println("Application Continues Successfully...");
+        int[] capacities = {72, 40, 56, 120, 80, 64};
+
+        System.out.println("========== UC16 ==========");
+
+        System.out.println();
+
+        System.out.println("Before Sorting");
+
+        for (int capacity : capacities) {
+            System.out.print(capacity + " ");
+        }
+
+        System.out.println();
+
+        service.bubbleSort(capacities);
+
+        System.out.println();
+
+        System.out.println("After Bubble Sort");
+
+        for (int capacity : capacities) {
+            System.out.print(capacity + " ");
+        }
+
+        System.out.println();
+
+
 
         scanner.close();
 
