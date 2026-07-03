@@ -33,13 +33,13 @@ public class Main {
      trainService.preserveInsertionOrder();
      //uc6
      trainService.mapBogieCapacity();
-        // UC7
-        trainService.sortBogiesByCapacity(train);
-        // UC8
-        trainService.filterPassengerBogies(train);
-        // UC9
-        trainService.groupBogies(train);
-        // UC10
+     // UC7
+     trainService.sortBogiesByCapacity(train);
+     // UC8
+      trainService.filterPassengerBogies(train);
+      // UC9
+      trainService.groupBogies(train);
+       // UC10
         trainService.totalSeats(train);
         //UC11
         Scanner scanner = new Scanner(System.in);
@@ -219,6 +219,39 @@ public class Main {
         System.out.println(Arrays.toString(bogieNames));
 
         System.out.println();
+        //uc18
+        String[] bogieIds = {
+                "BG101",
+                "BG105",
+                "BG103",
+                "BG108",
+                "BG102",
+                "BG110"
+        };
+
+        System.out.println("========== UC18 ==========");
+
+        System.out.println();
+
+        System.out.println("Available Bogie IDs");
+
+        System.out.println(Arrays.toString(bogieIds));
+
+        System.out.println();
+
+        System.out.print("Enter Bogie ID to Search : ");
+
+        String searchId = scanner.nextLine();
+
+        boolean found = service.searchBogie(bogieIds, searchId);
+
+        System.out.println();
+
+        if (found) {
+            System.out.println(searchId + " Found in Train Consist.");
+        } else {
+            System.out.println(searchId + " Not Found.");
+        }
         scanner.close();
 
     }

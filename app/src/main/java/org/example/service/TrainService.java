@@ -318,6 +318,23 @@ public class TrainService {
         Arrays.sort(bogieNames);
 
     }
+    /*
+     * UC18
+     * Linear Search for Bogie ID
+     */
+    public boolean searchBogie(String[] bogieIds, String searchId) {
+
+        for (String bogieId : bogieIds) {
+
+            if (bogieId.equals(searchId)) {
+                return true;
+            }
+
+        }
+
+        return false;
+    }
+
 
 
 
