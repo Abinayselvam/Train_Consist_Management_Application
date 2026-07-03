@@ -13,11 +13,15 @@ public class Main {
 
         Train train = new Train();
 
-        train.addBogie(new Bogie("Sleeper", "Passenger", 72));
-        train.addBogie(new Bogie("AC Chair", "Passenger", 56));
-        train.addBogie(new Bogie("First Class", "Passenger", 40));
-        train.addBogie(new Bogie("Cargo", "Goods", 0));
-        train.addBogie(new Bogie("Parcel", "Goods", 0));
+        train.addBogie(new Bogie(
+                "Cylindrical",
+                "Goods",
+                100,
+                "Petroleum"));
+        train.addBogie(new Bogie("AC Chair", "Passenger", 56,"Coal"));
+        train.addBogie(new Bogie("First Class", "Passenger", 40,"Cylindrical"));
+        train.addBogie(new Bogie("Cargo", "Goods", 0,"Wood"));
+
 
 
      TrainService trainService = new TrainService();
@@ -62,6 +66,41 @@ public class Main {
         } else {
             System.out.println("Cargo Code is Invalid");
         }
+
+        List<Bogie> goodsBogies = new ArrayList<>();
+
+        goodsBogies.add(new Bogie(
+                "Cylindrical",
+                "Goods",
+                100,
+                "Petroleum"));
+
+        goodsBogies.add(new Bogie(
+                "Open Wagon",
+                "Goods",
+                120,
+                "Coal"));
+
+        goodsBogies.add(new Bogie(
+                "Box Wagon",
+                "Goods",
+                90,
+                "Food"));
+
+        boolean safe = trainService.checkSafetyCompliance(goodsBogies);
+
+        System.out.println("========== UC12 ==========");
+
+        goodsBogies.forEach(System.out::println);
+
+        System.out.println();
+
+        if (safe) {
+            System.out.println("Train Safety Status : SAFE");
+        } else {
+            System.out.println("Train Safety Status : NOT SAFE");
+        }
+
 
         scanner.close();
 

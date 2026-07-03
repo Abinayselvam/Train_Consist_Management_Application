@@ -5,11 +5,13 @@ public class Bogie {
     private String name;
     private String type;
     private int capacity;
+    private String cargo;
 
-    public Bogie(String name, String type, int capacity) {
+    public Bogie(String name, String type, int capacity, String cargo) {
         this.name = name;
         this.type = type;
         this.capacity = capacity;
+        this.cargo = cargo;
     }
 
     public String getName() {
@@ -24,8 +26,12 @@ public class Bogie {
         return capacity;
     }
 
+    public String getCargo() {
+        return cargo;
+    }
+
     @Override
     public String toString() {
-        return name + " (" + type + ") - Capacity : " + capacity;
+        return name + " | " + type + " | Capacity : " + capacity + " | Cargo : " + cargo;
     }
 }
