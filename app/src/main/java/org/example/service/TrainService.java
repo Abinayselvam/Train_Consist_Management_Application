@@ -224,6 +224,36 @@ public class TrainService {
                     return true;
                 });
     }
+    /*
+     * UC13
+     * Loop Performance
+     */
+    public List<Bogie> filterUsingLoop(List<Bogie> bogies) {
+
+        List<Bogie> result = new ArrayList<>();
+
+        for (Bogie bogie : bogies) {
+
+            if (bogie.getCapacity() > 60) {
+                result.add(bogie);
+            }
+
+        }
+
+        return result;
+    }
+
+    /*
+     * UC13
+     * Stream Performance
+     */
+    public List<Bogie> filterUsingStream(List<Bogie> bogies) {
+
+        return bogies.stream()
+                .filter(b -> b.getCapacity() > 60)
+                .collect(Collectors.toList());
+
+    }
 
 
     public Train getTrain() {

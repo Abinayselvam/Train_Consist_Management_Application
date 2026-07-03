@@ -13,11 +13,7 @@ public class Main {
 
         Train train = new Train();
 
-        train.addBogie(new Bogie(
-                "Cylindrical",
-                "Goods",
-                100,
-                "Petroleum"));
+        train.addBogie(new Bogie("Cylindrical", "Goods",100,"Petroleum"));
         train.addBogie(new Bogie("AC Chair", "Passenger", 56,"Coal"));
         train.addBogie(new Bogie("First Class", "Passenger", 40,"Cylindrical"));
         train.addBogie(new Bogie("Cargo", "Goods", 0,"Wood"));
@@ -100,6 +96,58 @@ public class Main {
         } else {
             System.out.println("Train Safety Status : NOT SAFE");
         }
+        //uc13
+        List<Bogie> bogies = new ArrayList<>();
+
+        // Create large dataset
+
+        for (int i = 1; i <= 100000; i++) {
+
+            bogies.add(new Bogie(
+                    "Sleeper-" + i,
+                    "Passenger",
+                    (i % 100) + 1));
+
+        }
+
+        /*
+         * Loop Benchmark
+         */
+
+        long loopStart = System.nanoTime();
+
+        List<Bogie> loopResult = trainService.filterUsingLoop(bogies);
+
+        long loopEnd = System.nanoTime();
+
+        /*
+         * Stream Benchmark
+         */
+
+        long streamStart = System.nanoTime();
+
+        List<Bogie> streamResult = trainService.filterUsingStream(bogies);
+
+        long streamEnd = System.nanoTime();
+
+        long loopTime = loopEnd - loopStart;
+        long streamTime = streamEnd - streamStart;
+
+        System.out.println("========== UC13 ==========");
+
+        System.out.println();
+
+        System.out.println("Loop Filter Count    : " + loopResult.size());
+
+        System.out.println("Stream Filter Count  : " + streamResult.size());
+
+        System.out.println();
+
+        System.out.println("Loop Execution Time   : " + loopTime + " ns");
+
+        System.out.println("Stream Execution Time : " + streamTime + " ns");
+
+
 
 
         scanner.close();
