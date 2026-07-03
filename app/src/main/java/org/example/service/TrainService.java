@@ -208,7 +208,22 @@ public class TrainService {
 
         return matcher.matches();
     }
+    /*
+     * UC12 : Safety Compliance Check
+     */
+    public boolean checkSafetyCompliance(List<Bogie> goodsBogies) {
 
+        return goodsBogies.stream()
+                .allMatch(bogie -> {
+
+                    if (bogie.getName().equalsIgnoreCase("Cylindrical")) {
+
+                        return bogie.getCargo().equalsIgnoreCase("Petroleum");
+                    }
+
+                    return true;
+                });
+    }
 
 
     public Train getTrain() {
