@@ -1,5 +1,7 @@
 package org.example.model;
 
+import java.security.InvalidParameterException;
+
 public class Bogie {
 
     private String name;
@@ -7,13 +9,16 @@ public class Bogie {
     private int capacity;
     private String cargo;
 
-    //passenger bogie
-    public Bogie(String name, String type,int capacity) {
+    //passenger bogie constructor
+    public Bogie(String name, String type, int capacity) throws InvalidParameterException {
+        if(capacity <= 0) {
+            throw new InvalidParameterException("Capacity must be greater than 0");
+        }
         this.name = name;
         this.type = type;
         this.capacity = capacity;
     }
-
+    //goods bogie constructor
     public Bogie(String name, String type, int capacity, String cargo) {
         this.name = name;
         this.type = type;

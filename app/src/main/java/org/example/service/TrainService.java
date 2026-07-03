@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.exception.InvalidCapacityException;
 import org.example.model.Bogie;
 import org.example.model.Train;
 
@@ -253,6 +254,14 @@ public class TrainService {
                 .filter(b -> b.getCapacity() > 60)
                 .collect(Collectors.toList());
 
+    }
+    //uc13 Performance Comparison
+    public Bogie createPassengerBogie(String name,
+                                      String type,
+                                      int capacity)
+            throws InvalidCapacityException {
+
+        return new Bogie(name, type, capacity);
     }
 
 

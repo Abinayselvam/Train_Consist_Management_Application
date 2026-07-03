@@ -1,6 +1,7 @@
 package org.example;
 
 import com.sun.source.tree.Tree;
+import org.example.exception.InvalidCapacityException;
 import org.example.model.Bogie;
 import org.example.model.Train;
 import org.example.service.TrainService;
@@ -13,7 +14,11 @@ public class Main {
 
         Train train = new Train();
 
-        train.addBogie(new Bogie("Cylindrical", "Goods",100,"Petroleum"));
+        train.addBogie(new Bogie(
+                "Cylindrical",
+                "Goods",
+                100,
+                "Petroleum"));
         train.addBogie(new Bogie("AC Chair", "Passenger", 56,"Coal"));
         train.addBogie(new Bogie("First Class", "Passenger", 40,"Cylindrical"));
         train.addBogie(new Bogie("Cargo", "Goods", 0,"Wood"));
@@ -148,7 +153,26 @@ public class Main {
         System.out.println("Stream Execution Time : " + streamTime + " ns");
 
 
+        System.out.println("========== UC14 ==========");
 
+        try {
+
+            Bogie sleeper =
+                    trainService.createPassengerBogie(
+                            "Sleeper",
+                            "Passenger",
+                            72);
+
+            System.out.println("Passenger Bogie Created");
+
+            System.out.println(sleeper);
+
+        }
+        catch (InvalidCapacityException e) {
+
+            System.out.println(e.getMessage());
+
+        }
 
         scanner.close();
 
