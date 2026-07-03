@@ -40,6 +40,32 @@ public class Main {
         trainService.groupBogies(train);
         // UC10
         trainService.totalSeats(train);
+        //UC11
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("========== UC11 ==========");
+
+        System.out.print("Enter Train ID : ");
+        String trainId = scanner.nextLine();
+
+        System.out.print("Enter Cargo Code : ");
+        String cargoCode = scanner.nextLine();
+
+        if (trainService.validateTrainId(trainId)) {
+            System.out.println("Train ID is Valid");
+        } else {
+            System.out.println("Train ID is Invalid");
+        }
+
+        if (trainService.validateCargoCode(cargoCode)) {
+            System.out.println("Cargo Code is Valid");
+        } else {
+            System.out.println("Cargo Code is Invalid");
+        }
+
+        scanner.close();
+
+
 
     }
 }
