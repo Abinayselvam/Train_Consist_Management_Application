@@ -252,6 +252,30 @@ public class Main {
         } else {
             System.out.println(searchId + " Not Found.");
         }
+        //uc19
+        System.out.println("========== UC19 ==========");
+
+        System.out.println();
+
+        System.out.println("Sorted Bogie IDs");
+
+        System.out.println(Arrays.toString(bogieIds));
+
+        System.out.println();
+
+        System.out.print("Enter Bogie ID to Search : ");
+
+        String searchKey = scanner.nextLine();
+
+        boolean found1 = service.binarySearch(bogieIds, searchKey);
+
+        System.out.println();
+
+        if (found1) {
+            System.out.println(searchKey + " Found in Train Consist.");
+        } else {
+            System.out.println(searchKey + " Not Found.");
+        }
         scanner.close();
 
     }
