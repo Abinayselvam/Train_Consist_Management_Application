@@ -309,6 +309,15 @@ public class TrainService {
 
         }
     }
+    /*
+     * UC17
+     * Sort Bogie Names using Arrays.sort()
+     */
+    public void sortBogieNames(String[] bogieNames) {
+
+        Arrays.sort(bogieNames);
+
+    }
 
 
 

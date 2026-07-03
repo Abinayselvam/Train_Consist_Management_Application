@@ -193,11 +193,32 @@ public class Main {
         for (int capacity : capacities) {
             System.out.print(capacity + " ");
         }
+        String[] bogieNames = {
+                "Sleeper",
+                "Cargo",
+                "Engine",
+                "Guard",
+                "AC Chair",
+                "First Class"
+        };
+
+        System.out.println("========== UC17 ==========");
 
         System.out.println();
 
+        System.out.println("Before Sorting");
 
+        System.out.println(Arrays.toString(bogieNames));
 
+        service.sortBogieNames(bogieNames);
+
+        System.out.println();
+
+        System.out.println("After Sorting");
+
+        System.out.println(Arrays.toString(bogieNames));
+
+        System.out.println();
         scanner.close();
 
     }
