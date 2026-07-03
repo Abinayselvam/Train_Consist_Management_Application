@@ -2,6 +2,7 @@ package org.example;
 
 import com.sun.source.tree.Tree;
 import org.example.model.Bogie;
+import org.example.model.GoodsBogie;
 import org.example.model.Train;
 import org.example.service.TrainService;
 
@@ -146,13 +147,31 @@ public class Main {
         System.out.println("Loop Execution Time   : " + loopTime + " ns");
 
         System.out.println("Stream Execution Time : " + streamTime + " ns");
+        System.out.println("=== UC15 : Safe Cargo Assignment ===");
 
+        TrainService service = new TrainService();
 
+        GoodsBogie bogie1 = new GoodsBogie("BG101", "Cylindrical");
 
+        GoodsBogie bogie2 = new GoodsBogie("BG102", "Rectangular");
+
+        System.out.println();
+
+        System.out.println("Assigning Petroleum to Cylindrical Bogie");
+
+        service.assignCargo(bogie1, "Petroleum");
+
+        System.out.println();
+
+        System.out.println("Assigning Petroleum to Rectangular Bogie");
+
+        service.assignCargo(bogie2, "Petroleum");
+
+        System.out.println();
+
+        System.out.println("Application Continues Successfully...");
 
         scanner.close();
-
-
 
     }
 }

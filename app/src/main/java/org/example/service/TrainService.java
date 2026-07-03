@@ -1,6 +1,8 @@
 package org.example.service;
 
 import org.example.model.Bogie;
+import org.example.model.CargoSafetyException;
+import org.example.model.GoodsBogie;
 import org.example.model.Train;
 
 import java.util.*;
@@ -253,6 +255,34 @@ public class TrainService {
                 .filter(b -> b.getCapacity() > 60)
                 .collect(Collectors.toList());
 
+    }
+
+    //uc15
+    public void assignCargo(GoodsBogie bogie, String cargo)  {
+        try
+        {
+            if (bogie.getShape().equalsIgnoreCase("Rectangular")
+                    && cargo.equalsIgnoreCase("Petroleum")) {
+
+                throw new CargoSafetyException(
+                        "Petroleum cannot be assigned to Rectangular Bogie.");
+            }
+
+            bogie.setCargo(cargo);
+
+            System.out.println("Cargo Assigned Successfully.");
+
+            System.out.println(bogie);
+        }
+        catch (CargoSafetyException ex)
+        {
+            System.err.println("Cargo assignment Failed");
+            System.err.println(ex.getMessage());
+
+        }
+        finally {
+            System.out.println("Successfully completed the Cargo assignment");
+        }
     }
 
 
