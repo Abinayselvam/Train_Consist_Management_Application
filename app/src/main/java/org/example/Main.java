@@ -276,6 +276,33 @@ public class Main {
         } else {
             System.out.println(searchKey + " Not Found.");
         }
+
+        //uc20
+        // Empty Train Consist
+        String[] bogieIds2 = {};
+
+        System.out.println("========== UC20 ==========\n");
+
+        try {
+
+            boolean found3 = service.searchBogie(bogieIds2, "BG101");
+
+            if (found) {
+                System.out.println("Bogie Found.");
+            } else {
+                System.out.println("Bogie Not Found.");
+            }
+
+        } catch (IllegalStateException e) {
+
+            System.out.println("Error : " + e.getMessage());
+
+        }
+
+        System.out.println("\nSearch Operation Completed.");
+
+
+
         scanner.close();
 
     }

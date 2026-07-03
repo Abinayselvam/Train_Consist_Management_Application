@@ -322,18 +322,18 @@ public class TrainService {
      * UC18
      * Linear Search for Bogie ID
      */
-    public boolean searchBogie(String[] bogieIds, String searchId) {
-
-        for (String bogieId : bogieIds) {
-
-            if (bogieId.equals(searchId)) {
-                return true;
-            }
-
-        }
-
-        return false;
-    }
+//    public boolean searchBogie(String[] bogieIds, String searchId) {
+//
+//        for (String bogieId : bogieIds) {
+//
+//            if (bogieId.equals(searchId)) {
+//                return true;
+//            }
+//
+//        }
+//
+//        return false;
+//    }
     /*
      * UC19
      * Binary Search for Bogie ID
@@ -360,6 +360,28 @@ public class TrainService {
 
         return false;
     }
+    /*
+     * UC20
+     * Search Bogie with Exception Handling
+     */
+    public boolean searchBogie(String[] bogieIds, String searchKey) {
+
+        // Defensive Programming
+        if (bogieIds == null || bogieIds.length == 0) {
+            throw new IllegalStateException("Train consist is empty. Please add bogies before searching.");
+        }
+
+        // Linear Search
+        for (String bogieId : bogieIds) {
+
+            if (bogieId.equals(searchKey)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
     public Train getTrain() {
         return train;
