@@ -1,9 +1,13 @@
 package org.example.service;
 
+import org.example.exception.InvalidCapacityException;
+import org.example.model.Bogie;
 import org.example.model.Train;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
+
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 
 public class TrainService {
@@ -19,30 +23,9 @@ public class TrainService {
         System.out.println();
 
         System.out.println("Train initialized successfully.");
-        System.out.println("Initial Bogie Count : " + train.getConsist().size());
+        System.out.println("Initial Bogie Count : " + train.getBogies().size());
     }
-    public void addPassengerBogies() {
 
-        System.out.println("=== Train Consist Management App ===");
-        System.out.println();
-
-        train.getConsist().add("Sleeper");
-        train.getConsist().add("AC Chair");
-        train.getConsist().add("First Class");
-
-        System.out.println("Passenger Bogies:");
-        System.out.println(train.getConsist());
-
-        train.getConsist().remove("AC Chair");
-
-        System.out.println();
-        System.out.println("After Removing AC Chair:");
-        System.out.println(train.getConsist());
-
-        System.out.println();
-        System.out.println("Sleeper Exists : "
-                + train.getConsist().contains("Sleeper"));
-    }
     public void trackUniqueBogieIds() {
 
         Set<String> bogieIds = new HashSet<>();
@@ -74,6 +57,213 @@ public class TrainService {
         System.out.println("Final Train Consist");
         System.out.println(train);
     }
+
+    public void preserveInsertionOrder() {
+
+        System.out.println("=== Train Consist Management App ===");
+        System.out.println();
+
+        Set<String> trainFormation = new LinkedHashSet<>();
+
+        trainFormation.add("Engine");
+        trainFormation.add("Sleeper");
+        trainFormation.add("Cargo");
+        trainFormation.add("Guard");
+
+        // Duplicate Entry
+        trainFormation.add("Sleeper");
+
+        System.out.println("Train Formation");
+
+        for (String bogie : trainFormation) {
+            System.out.println(bogie);
+        }
+
+        System.out.println();
+
+        System.out.println("Total Bogies : " + trainFormation.size());
+    }
+    public void mapBogieCapacity() {
+
+        System.out.println("=== Train Consist Management App ===");
+        System.out.println();
+
+        Map<String, Integer> bogieCapacity = new HashMap<>();
+
+        bogieCapacity.put("Sleeper", 72);
+        bogieCapacity.put("AC Chair", 78);
+        bogieCapacity.put("First Class", 24);
+
+        System.out.println("Bogie Capacity Details");
+        System.out.println("----------------------");
+
+        for (Map.Entry<String, Integer> entry : bogieCapacity.entrySet()) {
+
+            System.out.println("Bogie Name : " + entry.getKey());
+            System.out.println("Capacity   : " + entry.getValue());
+            System.out.println();
+        }
+
+    }
+
+
+    /*
+        UC7
+     */
+    public void sortBogiesByCapacity(Train train) {
+
+        train.getBogies()
+                .sort(Comparator.comparingInt(Bogie::getCapacity));
+
+        System.out.println("\n===== Sorted Bogies =====");
+
+        train.getBogies()
+                .forEach(System.out::println);
+    }
+
+    /*
+        UC8
+     */
+
+    public void filterPassengerBogies(Train train) {
+
+        List<Bogie> filtered =
+                train.getBogies()
+                        .stream()
+                        .filter(b -> b.getCapacity() > 60)
+                        .collect(Collectors.toList());
+
+        System.out.println("\n===== Capacity Greater Than 60 =====");
+
+        filtered.forEach(System.out::println);
+    }
+
+    /*
+        UC9
+     */
+
+    public void groupBogies(Train train) {
+
+        Map<String, List<Bogie>> grouped =
+
+                train.getBogies()
+                        .stream()
+                        .collect(Collectors.groupingBy(Bogie::getType));
+
+        System.out.println("\n===== Grouped Bogies =====");
+
+        grouped.forEach((type, list) -> {
+
+            System.out.println(type);
+
+            list.forEach(System.out::println);
+
+            System.out.println();
+
+        });
+
+    }
+
+    /*
+        UC10
+     */
+
+    public void totalSeats(Train train) {
+
+        Integer total =
+
+                train.getBogies()
+                        .stream()
+                        .map(Bogie::getCapacity)
+                        .reduce(0, Integer::sum);
+
+        System.out.println("\n==============================");
+        System.out.println("Total Seating Capacity : " + total);
+        System.out.println("==============================");
+
+    }
+    /*
+     * UC11 : Validate Train ID
+     */
+    public boolean validateTrainId(String trainId) {
+
+        String regex = "TRN-\\d{4}";
+
+        Pattern pattern = Pattern.compile(regex);
+
+        Matcher matcher = pattern.matcher(trainId);
+
+        return matcher.matches();
+    }
+
+    /*
+     * UC11 : Validate Cargo Code
+     */
+    public boolean validateCargoCode(String cargoCode) {
+
+        String regex = "PET-[A-Z]{2}";
+
+        Pattern pattern = Pattern.compile(regex);
+
+        Matcher matcher = pattern.matcher(cargoCode);
+
+        return matcher.matches();
+    }
+    /*
+     * UC12 : Safety Compliance Check
+     */
+    public boolean checkSafetyCompliance(List<Bogie> goodsBogies) {
+
+        return goodsBogies.stream()
+                .allMatch(bogie -> {
+
+                    if (bogie.getName().equalsIgnoreCase("Cylindrical")) {
+
+                        return bogie.getCargo().equalsIgnoreCase("Petroleum");
+                    }
+
+                    return true;
+                });
+    }
+    /*
+     * UC13
+     * Loop Performance
+     */
+    public List<Bogie> filterUsingLoop(List<Bogie> bogies) {
+
+        List<Bogie> result = new ArrayList<>();
+
+        for (Bogie bogie : bogies) {
+
+            if (bogie.getCapacity() > 60) {
+                result.add(bogie);
+            }
+
+        }
+
+        return result;
+    }
+
+    /*
+     * UC13
+     * Stream Performance
+     */
+    public List<Bogie> filterUsingStream(List<Bogie> bogies) {
+
+        return bogies.stream()
+                .filter(b -> b.getCapacity() > 60)
+                .collect(Collectors.toList());
+
+    }
+    //uc13 Performance Comparison
+    public Bogie createPassengerBogie(String name,
+                                      String type,
+                                      int capacity)
+            throws InvalidCapacityException {
+
+        return new Bogie(name, type, capacity);
+    }
+
 
     public Train getTrain() {
         return train;

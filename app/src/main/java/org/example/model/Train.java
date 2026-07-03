@@ -2,19 +2,19 @@ package org.example.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class Train {
-    private List<String> consist;
+
+    private List<Bogie> bogies;
 
     public Train() {
-        consist = new ArrayList<>();
+        bogies = new ArrayList<>();
     }
 
-    public List<String> getConsist() {
-        return consist;
+    public void addBogie(Bogie bogie) {
+        bogies.add(bogie);
     }
 
-    public void setConsist(List<String> consist) {
-        this.consist = consist;
+    public List<Bogie> getBogies() {
+        return bogies;
     }
 }
