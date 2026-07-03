@@ -334,9 +334,32 @@ public class TrainService {
 
         return false;
     }
+    /*
+     * UC19
+     * Binary Search for Bogie ID
+     */
+    public boolean binarySearch(String[] bogieIds, String searchKey) {
 
+        int low = 0;
+        int high = bogieIds.length - 1;
 
+        while (low <= high) {
 
+            int mid = (low + high) / 2;
+
+            int compare = bogieIds[mid].compareTo(searchKey);
+
+            if (compare == 0) {
+                return true;
+            } else if (compare < 0) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+
+        return false;
+    }
 
     public Train getTrain() {
         return train;
